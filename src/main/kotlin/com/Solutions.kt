@@ -1,11 +1,12 @@
 package com
 
+
 class Solutions {
-    fun twoSumBasic(nums: IntArray, target: Int): IntArray {
-        for (i in 0 until nums.size) {
+    fun twoSumBasic(nums: IntArray, target: Int): List<Int> {
+        for (i in nums.indices) {
             for (j in i + 1 until nums.size) {
                 if (nums[i] + nums[j] == target) {
-                    return intArrayOf(i, j)
+                    return listOf(i, j)
                 }
             }
         }
@@ -13,15 +14,40 @@ class Solutions {
         throw IllegalArgumentException("No solution")
     }
 
-    fun twoSum(nums: IntArray, target: Int): IntArray {
-        val map = HashMap<Int, Int>()
-        nums.forEachIndexed { idx, item ->
-            val found = map[target - item]
-            found?.let {
-                return intArrayOf(found, idx)
+    fun twoSumBruteForce(nums: IntArray, target: Int): List<Int> {
+        for (i in nums.indices) {
+            for (j in i + 1 until nums.size) {
+                if (nums[j] == target - nums[i]) {
+                    return listOf(i, j)
+                }
             }
-            map[item] = idx
         }
-        throw IllegalArgumentException("No solution")
+        throw java.lang.IllegalArgumentException("No two sum solution")
+    }
+
+    fun twoSumHashTable(nums: IntArray, target: Int): List<Int> {
+        val map: MutableMap<Int, Int> = HashMap()
+        for (i in nums.indices) {
+            map[nums[i]] = i
+        }
+        for (i in nums.indices) {
+            val complement = target - nums[i]
+            if (map.containsKey(complement) && map[complement] != i) {
+                return listOf(i, map[complement]!!)
+            }
+        }
+        throw java.lang.IllegalArgumentException("No two sum solution")
+    }
+
+    fun onePassHashTable(nums: IntArray, target: Int): List<Int> {
+        val map: MutableMap<Int, Int> = HashMap()
+        for (i in nums.indices) {
+            val complement = target - nums[i]
+            if (map.containsKey(complement)) {
+                return listOf(map[complement]!!, i)
+            }
+            map[nums[i]] = i
+        }
+        throw java.lang.IllegalArgumentException("No two sum solution")
     }
 }

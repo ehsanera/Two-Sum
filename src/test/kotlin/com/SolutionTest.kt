@@ -6,16 +6,9 @@ import org.junit.jupiter.api.Test
 class SolutionTest {
     @Test
     fun twoSum() {
-        t(intArrayOf(2, 7, 11, 15), 9, intArrayOf(0, 1))
-        t(intArrayOf(3, 2, 4), 6, intArrayOf(1, 2))
-    }
-
-    private fun t(nums: IntArray, target: Int, expected: IntArray) {
-        val actual = Solutions().twoSumBasic(nums, target)
-
-        assertEquals(expected.size, actual.size)
-        expected.forEachIndexed { index, i ->
-            assertEquals(expected[index], i)
-        }
+        assertEquals(Solutions().twoSumBasic(intArrayOf(1, 5, 8, 6, 9, 2, 3, 4, 7), 9), listOf(0, 2))
+        assertEquals(Solutions().twoSumBruteForce(intArrayOf(1, 5, 8, 6, 9, 2, 3, 4, 7), 9), listOf(0, 2))
+        assertEquals(Solutions().twoSumHashTable(intArrayOf(1, 5, 8, 6, 9, 2, 3, 4, 7), 9), listOf(0, 2))
+        assertEquals(Solutions().onePassHashTable(intArrayOf(1, 5, 8, 6, 9, 2, 3, 4, 7), 9), listOf(0, 2))
     }
 }
