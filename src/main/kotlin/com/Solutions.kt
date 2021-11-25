@@ -14,6 +14,18 @@ class Solutions {
         throw IllegalArgumentException("No solution")
     }
 
+    fun twoSumWhen(nums: IntArray, target: Int): List<Int> {
+        for (i in nums.indices) {
+            for (j in i + 1 until nums.size) {
+                when (nums[i] + nums[j]) {
+                    target -> return listOf(i, j)
+                }
+            }
+        }
+
+        throw IllegalArgumentException("No solution")
+    }
+
     fun twoSumBruteForce(nums: IntArray, target: Int): List<Int> {
         for (i in nums.indices) {
             for (j in i + 1 until nums.size) {
